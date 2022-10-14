@@ -1,0 +1,112 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hi
+    - hello
+- intent: goodbye
+  examples: |
+   - sjdklasd
+   - asdkljaskldj93230
+   - 237846ahsdaasda
+   - lol
+   - ajkhdwk
+   - jehqi756
+   - @sdlfhwhewuiru
+   
+
+- intent: finish
+  examples: |
+    - bye
+    - thank you 
+    - ok
+    - okok
+    - tq
+    
+
+- regex: validate_email
+  examples: |
+    - \b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b
+# - ^[a-zA-Z0-9-_]+@[a-zA-Z0-9]+\.[a-z]{1,3}$
+- intent: email
+  examples: |
+    - [drashtio@gmail.com]{"entity": "validate_email"}
+    - [payal@yudiz.com]{"entity": "validate_email"}
+    - [mayank123_@gmail.com]{"entity": "validate_email"}
+    - [isha67P@yahoo.com]{"entity" : "validate_email"}
+    - [rohan45@gmail.com]{"entity" : "validate_email"}
+    - [payal2@yahoo.com]{"entity" : "validate_email"}
+    - [mahgek67@Gamil.com]{"entity" : "validate_email"}
+    - [jinal9@yahoo.com]{"entity" : "validate_email"}
+    - [shweta23#gmail.com{"entity" : "validate_email"}
+    - [dhiraj.davw@gmail.com]{"entity" : "validate_email"}
+    - [jahal.dras@outlook.com]{"entity" : "validate_email"}
+
+- intent: hotel
+  examples: |
+    - [hotel](hotel)
+    - book [hotel](hotel) 
+    
+- intent: next_weekend
+  examples: |
+    - next_weekend
+- intent: dates
+  examples: |
+    - [may](month) [12](start_date) - [23](end_date)
+    - [june](month) [1](start_date) - [7](end_date)
+    - [december](month) [3](start_date) - [13](end_date)
+    - [april](month) [5](start_date) - [7](end_date)
+    - [dec](month) [12](start_date) - [30](end_date)
+    - [july](month) [3](start_date) - [12](end_date)
+    - [march](month) [6](start-data) - [11](end_date)
+    - [september](month) [11](start-date) - [23](end_date)
+    - [february](month) [1](start_date) - [21](end_date)
+    - [june](month) [31](start_date) - [02](end_date)
+    - [july](month) [8](start_date) - [16](end_date)
+    - [october](month) [9](start_date) - [18](end_date)
+    - [november](month) [12](start_date) - [19](end_date)
+# - intent: guest_country
+#   examples: |
+#     - [india](country)
+#     - [maldives](country)
+#     - [usa](country)
+#     - [bangladesh](country)
+#     - [china](country) 
+#     - [japan](country)
+#     - [italy](country)
+#     - [spain](country)
+#     - [germany](country)
+#     - [austria](country)
+
+- intent: location
+  examples: |
+    - [venice](city)
+    - [rome](city)
+    - [veraval](city)
+    - [Zocca](city)
+    - [Vecinos](city)
+    - [jaipur](city)
+    - [Newyork] (city)
+    - [sanfransisco](city)
+    - [kashmir](city)
+    - [Virgínia](city)
+    - [Rotterdam](city)
+    - [dubai](city)
+    - [ooty](city)
+    - [vadodara](city)
+    - [Abu dhabi](city)
+    - [Tiberias](city)
+    - [Tel Aviv](city)
+    
+- intent: flight
+  examples: |
+    - [flights](flight)
+    - I want to book [flight](flight)
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?

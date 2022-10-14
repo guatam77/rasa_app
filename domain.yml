@@ -1,0 +1,195 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  # - guest_country
+  - email
+  - hotel
+  - location
+  - dates
+  - flight
+  - next_weekend
+  - finish
+  - bot_challenge
+entities:
+  - validate_email
+  # - country
+  - city
+  - month
+  - start_date
+  - end_date
+  - hotel
+  - flight
+slots:
+  # year:
+  #   type: text
+  #   initial_value: null
+  #   auto_fill: true
+  #   influence_conversation: false
+
+  validate_email:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: validate_email
+    influence_conversation: true
+  hotel:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: hotel
+    influence_conversation: true    
+        
+  flight:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: flight
+  city:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: city
+      intent: location
+      conditions:
+      - active_loop: hotel_enquiry_form
+        requested_slot: city
+    influence_conversation: true
+  month:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: month
+      conditions:
+      - active_loop: hotel_enquiry_form
+        requested_slot: start_date
+    influence_conversation: true
+  start_date:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: start_date
+      conditions:
+      - active_loop: hotel_enquiry_form
+        requested_slot: start_date
+    influence_conversation: true
+    
+  end_date: 
+    type: text
+    mappings: 
+    - type: from_entity
+      entity: end_date
+      conditions:
+      - active_loop: hotel_enquiry_form
+        requested_slot: start_date
+    influence_conversation: true
+
+  # country:
+  #   type: text
+  #   mappings:
+  #   - type: from_entity
+  #     entity: country
+  #     intent: guest_country
+  #     conditions:
+  #     - active_loop: hotel_enquiry_form
+  #       requested_slot: country
+  #   influence_conversation: true
+
+forms:
+  hotel_enquiry_form:
+    required_slots:
+      # - country
+      - city
+      - start_date
+      - month
+      - end_date
+      # - end_date
+actions: 
+  - validate_hotel_enquiry_form
+  - action_greet
+  - action_next_weekend
+  - action_email
+  - action_show_search
+  # - action_dates  
+  # - action_hotel
+responses:
+  utter_greet:
+  - text: "📧 Can you please enter your valid email ?"
+  utter_goodbye:
+  - text: "Will you please rephrase"
+  utter_iamabot:
+  - text: "I didn't get what you are saying"
+  utter_finish:
+  - text: "Thank you , Hope information was useful."
+  utter_email:
+  - text: "🙋‍♀️ Hi, I'm an AI assistant. Here to help you plan the perfect next trip Let's chat or click on one of the options below:"
+    quick_replies:
+      - content_type: text
+        title: ✈️ Flight
+        payload: /flight{{"flight":"flight"}}
+      - content_type: text
+        title: 🏩 Hotel
+        payload: /hotel{{"hotel":"hotel"}}  
+  # utter_ask_country:
+  # - text : "From which country you belong ? "
+  utter_ask_city:
+  - text: "🏠 which location are you interested in ?"    
+    quick_replies:
+      - content_type: text
+        title: Dubai
+        payload: Dubai
+      - content_type: text
+        title: Venice
+        payload: Venice
+  utter_ask_start_date:
+  - text: "📅  What are the dates of your stay? Say dates like 'May 15 - 25' "
+    quick_replies:
+        - content_type: text
+          title: next weekend
+          payload: /next_weekend
+  utter_search:
+    - text: 🔎 "searching on \n 🏨 {hotel} \n 🌉 {city} on date \n 📅 {month} {start_date} to {month} {end_date} " 
+      quick_replies:
+        - content_type: text
+          title: Start again
+          payload: /email
+        - content_type: text
+          title: Change Date
+          payload: /dates
+     
+  utter_flight:
+  - text: welcome flight .....
+
+  # utter_hotel:
+  # - text: which {hotel} location are you interested in ?
+  #   buttons:
+  #   - title: Chennai
+  #     payload: Chennai
+  #   - title: Africa
+  #     payload: Africa
+  #   - title: New_zealand
+  #     payload: New_zealand 
+  # utter_location:
+  #   - text: What are the dates of your stay?  {city} Say dates like "May 15 - 25"
+  # 
+ 
+  # utter_dates:
+  #   # - text: Searching result for {hotel} in {city} on date {hotel_date}
+  #     - text : thank you
+
+  # utter_cheer_up:
+  # - text: "Here is something to cheer you up:"
+  #   image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  # utter_did_that_help:
+  # - text: "Did that help you?"
+
+  # utter_happy:
+  # - text: "Great, carry on!"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+ 

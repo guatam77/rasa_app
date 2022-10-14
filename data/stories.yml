@@ -1,0 +1,39 @@
+version: "3.1"
+
+stories:
+
+
+- story: email path
+  steps:
+  - intent: greet
+  - action: action_greet
+  - intent: email
+  - action: action_email
+
+- story: hotel form path
+  steps:
+  - intent: hotel
+    entities:
+      - city: "dubai" 
+      - month: "march"
+      - start_date: 12
+      - end_date : 22
+  - action: hotel_enquiry_form
+  - active_loop: hotel_enquiry_form
+  - active_loop: null 
+  - action: utter_search
+  - action: action_show_search
+
+- story: end of talk
+  steps:
+  - intent: finish
+  - action: utter_finish
+
+  # - intent: finish
+  # - action: utter_finish
+  # - intent: next_weekend
+  # - action: action_next_weekend
+
+
+
+
